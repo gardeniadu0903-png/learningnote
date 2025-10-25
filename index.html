@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -472,9 +477,10 @@
         <h1 class="text-xl font-bold text-gray-800">学小铺｜智能笔记平台</h1>
       </div>
       <div class="flex items-center gap-2 flex-wrap">
-        <button id="settingsBtn" class="top-btn bg-gray-100 text-gray-700">
-          <i class="fa fa-cog"></i> 设置
-        </button>
+        <button id="settingsBtn" class="top-btn bg-gray-100 text-gray-700" 
+        onclick="document.getElementById('settingsPanel').classList.add('open'); document.body.style.overflow='hidden';">
+  <i class="fa fa-cog"></i> 设置
+</button>
         <button id="focusCardsBtn" class="top-btn bg-purple-600 text-white">
           <i class="fa fa-flag"></i> 重点卡片库
         </button>
@@ -740,9 +746,10 @@
   <div id="settingsPanel">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-xl font-bold text-gray-800">界面设置</h2>
-      <button id="closeSettingsBtn" class="text-gray-500 hover:text-gray-700">
-        <i class="fa fa-times text-xl"></i>
-      </button>
+      <button id="closeSettingsBtn" class="text-gray-500 hover:text-gray-700"
+        onclick="document.getElementById('settingsPanel').classList.remove('open'); document.body.style.overflow='';">
+  <i class="fa fa-times text-xl"></i>
+</button>
     </div>
     
     <div class="settings-section">
@@ -930,38 +937,38 @@
     </div>
   </div>
 
-  <!-- 欢迎弹窗 -->
-  <div id="welcomeModal" class="welcome-modal open">
-    <div class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
-      <div class="flex items-start gap-4 flex-wrap">
-        <div style="flex:1 min-w-[300px]">
-  <div class="flex justify-between items-start">
-    <h2 id="welcomeTitle" class="text-xl font-bold mb-2">欢迎进入 学小铺｜智能笔记平台</h2>
-    <button id="closeWelcome" aria-label="关闭弹窗" class="top-btn bg-gray-200 text-gray-700">
-      <i class="fa fa-times"></i>
-            </button>
-          </div>
-          <p class="text-sm text-gray-600 mb-3">功能提示：</p>
-          <div class="text-sm text-gray-700 space-y-1 mb-4">
-            <p>1. 选中文字可添加"重点/疑问/例题/易错"标签</p>
-            <p>2. 选中重点内容点击"转为重点卡片"，可加入复习库</p>
-            <p>3. 考研/CET4/CET6/TEM8词汇自动标注（不同颜色背景）</p>
-            <p>4. 支持文件夹分类管理重点卡片，可下载备份</p>
-            <p>5. 选中文字后点击"开始朗读"可进行文字转语音</p>
-            <p>6. 英文单词/句子支持自动翻译，选中即可查看结果</p>
-          </div>
-          <div>
-            <button id="closeWelcome2" class="top-btn bg-indigo-600 text-white">知道了，关闭</button>
-          </div>
+<!-- 欢迎弹窗 -->
+<div id="welcomeModal" class="welcome-modal open">
+  <div class="welcome-card" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="flex items-start gap-4 flex-wrap">
+      <div style="flex:1; min-width:300px;">
+        <div class="flex justify-between items-start">
+          <h2 id="welcomeTitle" class="text-xl font-bold mb-2">欢迎进入 学小铺｜智能笔记平台</h2>
+          <button id="closeWelcome" aria-label="关闭弹窗" class="top-btn bg-gray-200 text-gray-700">
+            <i class="fa fa-times"></i>
+          </button>
         </div>
-        <div style="width:180px; text-align:center flex-shrink-0">
-          <div class="img-placeholder" id="welcomeImagePlaceholder">图片位置</div>
-          <p class="text-xs text-gray-500 mt-2">点击可替换首页图片</p>
+        <p class="text-sm text-gray-600 mb-3">功能提示：</p>
+        <div class="text-sm text-gray-700 space-y-1 mb-4">
+          <p>1. 选中文字可添加"重点/疑问/例题/易错"标签</p>
+          <p>2. 选中重点内容点击"转为重点卡片"，可加入复习库</p>
+          <p>3. 考研/CET4/CET6/TEM8词汇自动标注（不同颜色背景）</p>
+          <p>4. 支持文件夹分类管理重点卡片，可下载备份</p>
+          <p>5. 选中文字后点击"开始朗读"可进行文字转语音</p>
+          <p>6. 英文单词/句子支持自动翻译，选中即可查看结果</p>
+        </div>
+        <div>
+          <button id="closeWelcome2" class="top-btn bg-indigo-600 text-white">知道了，关闭</button>
         </div>
       </div>
+     <div style="width:45%; text-align:center; flex-shrink:0;">
+  <img src="https://raw.githubusercontent.com/xuexiaopu/learningnote/main/payment.png" 
+       alt="学小铺智能笔记平台" 
+       style="width:100%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+</div>
     </div>
   </div>
-
+</div>
   <!-- 重点卡片库提示 -->
   <div class="card-library-tip" id="cardLibraryTip">
     <i class="fa fa-exclamation-triangle card-library-tip-icon"></i>
