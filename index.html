@@ -1,8 +1,4 @@
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -30,11 +26,12 @@
               purple: '#f3e8ff'
             },
             vocab: {
-                postgradHigh: '#bbf7d0', 
-              postgradMid: '#dcfce7',  
-              cet4: '#dbeafe',
-              cet6: '#ede9fe',
-              tem8: '#fce7f3'
+              postgradHigh: '#bbf7d0',
+              postgradMid: '#dcfce7',
+              tem8: '#fce7f3',
+              tem4: '#fed7aa',
+              cet6: '#ddd6fe',
+              cet4: '#dbeafe'
             },
             dark: {
               bg: '#1e293b',
@@ -52,11 +49,12 @@
       .btn-tool { @apply p-2 rounded-md hover:bg-gray-100 transition-colors; }
       .note-tag { @apply px-2 py-1 rounded-full text-xs font-medium cursor-pointer; }
       .vocab-tag { @apply px-1 rounded border-b-2 cursor-help; }
-      .vocab-postgradHigh { @apply bg-vocab-postgradHigh border-primary; }
-      .vocab-postgradMid { @apply bg-vocab-postgradMid border-blue-400; }
-      .vocab-cet4 { @apply bg-vocab-cet4 border-blue-500; }
-      .vocab-cet6 { @apply bg-vocab-cet6 border-purple-500; }
-      .vocab-tem8 { @apply bg-vocab-tem8 border-pink-500; }
+      .vocab-postgradHigh { @apply bg-vocab-postgradHigh border-b-2 border-green-600; }
+      .vocab-postgradMid { @apply bg-vocab-postgradMid border-b-2 border-green-400; }
+      .vocab-tem8 { @apply bg-vocab-tem8 border-b-2 border-pink-500; }
+      .vocab-tem4 { @apply bg-vocab-tem4 border-b-2 border-orange-500; }
+      .vocab-cet6 { @apply bg-vocab-cet6 border-b-2 border-purple-500; }
+      .vocab-cet4 { @apply bg-vocab-cet4 border-b-2 border-blue-500; }
       .translate-result { @apply bg-green-50 p-3 rounded my-2 text-sm border border-green-100; }
       .folder-active { @apply bg-blue-50 border-l-4 border-primary; }
       .top-btn { @apply px-3 py-2 rounded-md font-medium flex items-center gap-2 transition-colors text-sm; }
@@ -99,29 +97,40 @@
       background-color: var(--hover-color);
     }
     
-     .dark-mode .vocab-postgradHigh {
+    .dark-mode .vocab-postgradHigh {
       background-color: #065f46;
       color: #bbf7d0;
+      border-color: #10b981;
     }
     
-      .dark-mode .vocab-postgradMid {
-      background-color: #10b981;
+    .dark-mode .vocab-postgradMid {
+      background-color: #059669;
       color: #dcfce7;
+      border-color: #34d399;
+    }
+    
+    .dark-mode .vocab-tem8 {
+      background-color: #9d174d;
+      color: #fce7f3;
+      border-color: #ec4899;
+    }
+    
+    .dark-mode .vocab-tem4 {
+      background-color: #9a3412;
+      color: #fed7aa;
+      border-color: #f97316;
+    }
+    
+    .dark-mode .vocab-cet6 {
+      background-color: #6b21a8;
+      color: #e9d5ff;
+      border-color: #a855f7;
     }
     
     .dark-mode .vocab-cet4 {
       background-color: #1e40af;
       color: #dbeafe;
-    }
-    
-    .dark-mode .vocab-cet6 {
-      background-color: #5b21b6;
-      color: #ede9fe;
-    }
-    
-    .dark-mode .vocab-tem8 {
-      background-color: #be185d;
-      color: #fce7f3;
+      border-color: #3b82f6;
     }
     
     .dark-mode .translate-result {
@@ -567,17 +576,20 @@
           
           <!-- 词汇标注工具 -->
           <div class="flex items-center space-x-2">
-            <button class="btn-tool bg-blue-100 text-blue-700 hover:bg-blue-200" id="togglePostGradWords" title="考研词汇标注">
+            <button class="btn-tool bg-green-100 text-green-700 hover:bg-green-200" id="togglePostGradWords" title="考研词汇标注">
               <i class="fa fa-bookmark mr-1"></i> 考研词汇
             </button>
-            <button class="btn-tool bg-blue-100 text-blue-700 hover:bg-blue-200" id="toggleCet4Words" title="CET4词汇标注">
-              <i class="fa fa-bookmark mr-1"></i> CET4
+            <button class="btn-tool bg-pink-100 text-pink-700 hover:bg-pink-200" id="toggleTem8Words" title="TEM8词汇标注">
+              <i class="fa fa-bookmark mr-1"></i> TEM8
+            </button>
+            <button class="btn-tool bg-orange-100 text-orange-700 hover:bg-orange-200" id="toggleTem4Words" title="TEM4词汇标注">
+              <i class="fa fa-bookmark mr-1"></i> TEM4
             </button>
             <button class="btn-tool bg-purple-100 text-purple-700 hover:bg-purple-200" id="toggleCet6Words" title="CET6词汇标注">
               <i class="fa fa-bookmark mr-1"></i> CET6
             </button>
-            <button class="btn-tool bg-pink-100 text-pink-700 hover:bg-pink-200" id="toggleTem8Words" title="TEM8词汇标注">
-              <i class="fa fa-bookmark mr-1"></i> TEM8
+            <button class="btn-tool bg-blue-100 text-blue-700 hover:bg-blue-200" id="toggleCet4Words" title="CET4词汇标注">
+              <i class="fa fa-bookmark mr-1"></i> CET4
             </button>
             <span class="text-sm text-gray-600" id="vocabStatus">词汇标注：全部开启</span>
           </div>
@@ -627,7 +639,7 @@
             <div class="text-xs text-gray-500 mt-2" id="popupVocabNote"></div>
           </div>
           <div id="editor" class="bg-white rounded-lg p-6 min-h-[500px] focus:outline-none" contenteditable="true">
-            <p>在这里开始记录笔记...<br><br>功能说明：<br>1. 英文单词/句子会自动翻译（选中即可查看）<br>2. 考研/CET/TEM词汇会自动标注（不同颜色背景）<br>3. 可添加重点卡片用于复习，支持文件夹分类<br>4. 可添加课堂时间点记录关键内容<br>5. 选中文字后点击"开始朗读"可进行文字转语音<br><br>提示：文档仅保存在当前浏览器会话中，关闭页面后将删除，请及时下载保存</p>
+            <p>在这里开始记录笔记...<br><br>功能说明：<br>1. 英文单词/句子会自动翻译（选中即可查看）<br>2. 考研/TEM8/TEM4/CET6/CET4词汇会自动标注（不同颜色背景）<br>3. 可添加重点卡片用于复习，支持文件夹分类<br>4. 可添加课堂时间点记录关键内容<br>5. 选中文字后点击"开始朗读"可进行文字转语音<br><br>提示：文档仅保存在当前浏览器会话中，关闭页面后将删除，请及时下载保存</p>
             <p><br>示例：The <span class="vocab vocab-postgradHigh" title="考研高频词：n. 能力，才能">ability</span> to <span class="vocab vocab-postgradHigh" title="考研高频词：v. 放弃，抛弃">abandon</span> old ideas is crucial for success.</p>
           </div>
         </div>
@@ -638,27 +650,31 @@
           <div class="text-sm space-y-4 max-h-[250px] overflow-y-auto mb-6">
             <div class="flex justify-between items-center pb-2 border-b border-gray-100">
               <span>总考研词汇数</span>
-              <span id="totalPostgradCount" class="font-medium text-blue-600">0</span>
+              <span id="totalPostgradCount" class="font-medium text-green-600">0</span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-100">
               <span>考研高频词汇</span>
-              <span id="postgradHighCount" class="font-medium text-blue-600">0</span>
+              <span id="postgradHighCount" class="font-medium text-green-600">0</span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-100">
               <span>考研中频词汇</span>
-              <span id="postgradMidCount" class="font-medium text-blue-600">0</span>
+              <span id="postgradMidCount" class="font-medium text-green-500">0</span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-              <span>CET4词汇</span>
-              <span id="cet4Count" class="font-medium text-blue-600">0</span>
+              <span>TEM8词汇</span>
+              <span id="tem8Count" class="font-medium text-pink-600">0</span>
+            </div>
+            <div class="flex justify-between items-center pb-2 border-b border-gray-100">
+              <span>TEM4词汇</span>
+              <span id="tem4Count" class="font-medium text-orange-600">0</span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-100">
               <span>CET6词汇</span>
               <span id="cet6Count" class="font-medium text-purple-600">0</span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-              <span>TEM8词汇</span>
-              <span id="tem8Count" class="font-medium text-pink-600">0</span>
+              <span>CET4词汇</span>
+              <span id="cet4Count" class="font-medium text-blue-600">0</span>
             </div>
           </div>
           <h3 class="font-bold text-gray-800 mb-3 flex items-center">
@@ -952,7 +968,7 @@
         <div class="text-sm text-gray-700 space-y-1 mb-4">
           <p>1. 选中文字可添加"重点/疑问/例题/易错"标签</p>
           <p>2. 选中重点内容点击"转为重点卡片"，可加入复习库</p>
-          <p>3. 考研/CET4/CET6/TEM8词汇自动标注（不同颜色背景）</p>
+          <p>3. 考研/TEM8/TEM4/CET6/CET4词汇自动标注（不同颜色背景）</p>
           <p>4. 支持文件夹分类管理重点卡片，可下载备份</p>
           <p>5. 选中文字后点击"开始朗读"可进行文字转语音</p>
           <p>6. 英文单词/句子支持自动翻译，选中即可查看结果</p>
@@ -991,24 +1007,27 @@
     let isTranslateEnabled = true;
     let vocabSettings = {
       postgrad: true,
-      cet4: true,
+      tem8: true,
+      tem4: true,
       cet6: true,
-      tem8: true
+      cet4: true
     };
     let currentCardId = null;
     let currentFolderId = 'all';
     let detectedVocabs = {
       postgradHigh: new Set(),
       postgradMid: new Set(),
-      cet4: new Set(),
+      tem8: new Set(),
+      tem4: new Set(),
       cet6: new Set(),
-      tem8: new Set()
+      cet4: new Set()
     };
     let vocabLib = {
       postgrad: [],
-      cet4: [],
+      tem8: [],
+      tem4: [],
       cet6: [],
-      tem8: []
+      cet4: []
     };
     let speechSynthesis = window.speechSynthesis;
     let currentUtterance = null;
@@ -1072,9 +1091,10 @@
       totalPostgrad: document.getElementById('totalPostgradCount'),
       postgradHigh: document.getElementById('postgradHighCount'),
       postgradMid: document.getElementById('postgradMidCount'),
-      cet4: document.getElementById('cet4Count'),
+      tem8: document.getElementById('tem8Count'),
+      tem4: document.getElementById('tem4Count'),
       cet6: document.getElementById('cet6Count'),
-      tem8: document.getElementById('tem8Count')
+      cet4: document.getElementById('cet4Count')
     };
 
     // 提示元素
@@ -1188,31 +1208,35 @@
         { word: "environment", freq: "high", pos: "n.", mean: "环境" },
         { word: "claim", freq: "high", pos: "v./n.", mean: "声称；要求" },
         { word: "merit", freq: "mid", pos: "n./v.", mean: "优点；值得" },
-        { word: "liberty", freq: "mid", pos: "n.", mean: "自由" },
-        { word: "philosophy", freq: "mid", pos: "n.", mean: "哲学" },
-        { word: "confused", freq: "high", pos: "adj.", mean: "困惑的" },
-        { word: "quality", freq: "high", pos: "n./adj.", mean: "质量；优质的" },
-        { word: "integrate", freq: "mid", pos: "v.", mean: "（使）合并" },
-        { word: "mere", freq: "high", pos: "adj.", mean: "仅仅的" },
-        { word: "urge", freq: "high", pos: "v./n.", mean: "催促；冲动" },
-        { word: "literature", freq: "high", pos: "n.", mean: "文学；著作" },
-        { word: "digital", freq: "high", pos: "adj.", mean: "数码的" },
-        { word: "address", freq: "high", pos: "v./n.", mean: "处理；地址" },
-        { word: "improve", freq: "high", pos: "v.", mean: "提高" }
+        { word: "liberty", freq: "mid", pos: "n.", mean: "自由" }
       ];
 
-      // CET4词汇
-      vocabLib.cet4 = [
-        { word: "ability", pos: "n.", mean: "能力，才能" },
-        { word: "able", pos: "adj.", mean: "能够的，有能力的" },
-        { word: "abroad", pos: "adv.", mean: "在国外，到国外" },
-        { word: "absence", pos: "n.", mean: "缺席，不在场" },
-        { word: "absolute", pos: "adj.", mean: "绝对的，完全的" },
-        { word: "accept", pos: "v.", mean: "接受，认可" },
-        { word: "access", pos: "n./v.", mean: "通道，进入；使用" },
-        { word: "accident", pos: "n.", mean: "事故，意外" },
-        { word: "accompany", pos: "v.", mean: "陪伴，陪同" },
-        { word: "achieve", pos: "v.", mean: "达到，获得" }
+      // TEM8词汇
+      vocabLib.tem8 = [
+        { word: "abjure", pos: "v.", mean: "发誓放弃，宣誓弃绝" },
+        { word: "ablution", pos: "n.", mean: "沐浴，净身" },
+        { word: "abnegation", pos: "n.", mean: "放弃，克制" },
+        { word: "abominate", pos: "v.", mean: "痛恨，憎恶" },
+        { word: "aboriginal", pos: "adj./n.", mean: "土著的；土著居民" },
+        { word: "abortive", pos: "adj.", mean: "失败的，夭折的" },
+        { word: "abrade", pos: "v.", mean: "磨损，擦伤" },
+        { word: "abrogate", pos: "v.", mean: "废除，取消" },
+        { word: "abstemious", pos: "adj.", mean: "节制的，节俭的" },
+        { word: "abstain", pos: "v.", mean: "戒除，弃权" }
+      ];
+
+      // TEM4词汇
+      vocabLib.tem4 = [
+        { word: "abandon", pos: "v.", mean: "放弃，抛弃" },
+        { word: "abolish", pos: "v.", mean: "废除，取消" },
+        { word: "abrupt", pos: "adj.", mean: "突然的，唐突的" },
+        { word: "absurd", pos: "adj.", mean: "荒谬的，荒唐的" },
+        { word: "accommodate", pos: "v.", mean: "容纳；使适应" },
+        { word: "accord", pos: "n./v.", mean: "一致，符合" },
+        { word: "acknowledge", pos: "v.", mean: "承认；答谢" },
+        { word: "acquire", pos: "v.", mean: "获得，取得" },
+        { word: "adapt", pos: "v.", mean: "适应；改编" },
+        { word: "adequate", pos: "adj.", mean: "足够的；适当的" }
       ];
 
       // CET6词汇
@@ -1229,18 +1253,18 @@
         { word: "absorb", pos: "v.", mean: "理解，掌握" }
       ];
 
-      // TEM8词汇
-      vocabLib.tem8 = [
-        { word: "abjure", pos: "v.", mean: "发誓放弃，宣誓弃绝" },
-        { word: "ablution", pos: "n.", mean: "沐浴，净身" },
-        { word: "abnegation", pos: "n.", mean: "放弃，克制" },
-        { word: "abominate", pos: "v.", mean: "痛恨，憎恶" },
-        { word: "aboriginal", pos: "adj./n.", mean: "土著的；土著居民" },
-        { word: "abortive", pos: "adj.", mean: "失败的，夭折的" },
-        { word: "abrade", pos: "v.", mean: "磨损，擦伤" },
-        { word: "abrogate", pos: "v.", mean: "废除，取消" },
-        { word: "abstemious", pos: "adj.", mean: "节制的，节俭的" },
-        { word: "abstain", pos: "v.", mean: "戒除，弃权" }
+      // CET4词汇
+      vocabLib.cet4 = [
+        { word: "ability", pos: "n.", mean: "能力，才能" },
+        { word: "able", pos: "adj.", mean: "能够的，有能力的" },
+        { word: "abroad", pos: "adv.", mean: "在国外，到国外" },
+        { word: "absence", pos: "n.", mean: "缺席，不在场" },
+        { word: "absolute", pos: "adj.", mean: "绝对的，完全的" },
+        { word: "accept", pos: "v.", mean: "接受，认可" },
+        { word: "access", pos: "n./v.", mean: "通道，进入；使用" },
+        { word: "accident", pos: "n.", mean: "事故，意外" },
+        { word: "accompany", pos: "v.", mean: "陪伴，陪同" },
+        { word: "achieve", pos: "v.", mean: "达到，获得" }
       ];
     }
 
@@ -1323,9 +1347,10 @@
     function updateVocabStatusText() {
       const enabledTypes = [];
       if (vocabSettings.postgrad) enabledTypes.push('考研词汇');
-      if (vocabSettings.cet4) enabledTypes.push('CET4');
-      if (vocabSettings.cet6) enabledTypes.push('CET6');
       if (vocabSettings.tem8) enabledTypes.push('TEM8');
+      if (vocabSettings.tem4) enabledTypes.push('TEM4');
+      if (vocabSettings.cet6) enabledTypes.push('CET6');
+      if (vocabSettings.cet4) enabledTypes.push('CET4');
       
       document.getElementById('vocabStatus').textContent = 
         `词汇标注：${enabledTypes.length > 0 ? enabledTypes.join('、') + '开启' : '全部关闭'}`;
@@ -1759,21 +1784,33 @@
     }
 
     // 新建文档
-    function createNewDoc() {
-      const id = generateUUID();
-      docs[id] = {
-        id: id,
-        title: '未命名文档',
-        content: `<p>在这里开始记录笔记...<br><br>功能说明：<br>1. 英文单词/句子会自动翻译（选中即可查看）<br>2. 考研/CET/TEM词汇会自动标注（不同颜色背景）<br>3. 可添加重点卡片用于复习，支持文件夹分类<br>4. 可添加课堂时间点记录关键内容<br>5. 选中文字后点击"开始朗读"可进行文字转语音<br><br>提示：文档仅保存在当前浏览器会话中，关闭页面后将删除，请及时下载保存</p>`,
-        timeline: [],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
+function createNewDoc() {
+  const id = generateUUID();
+  docs[id] = {
+    id: id,
+    title: '未命名文档',
+    content: `<p>在这里开始记录笔记...<br><br>功能说明：<br>1. 英文单词/句子会自动翻译（选中即可查看）<br>2. 考研/TEM8/TEM4/CET6/CET4词汇会自动标注（不同颜色背景）<br>3. 可添加重点卡片用于复习，支持文件夹分类<br>4. 可添加课堂时间点记录关键内容<br>5. 选中文字后点击"开始朗读"可进行文字转语音<br><br>提示：文档仅保存在当前浏览器会话中，关闭页面后将删除，请及时下载保存</p>
+    <p><br>示例：The <span class="vocab vocab-postgradHigh" title="考研高频词：n. 能力，才能">ability</span> to <span class="vocab vocab-postgradHigh" title="考研高频词：v. 放弃，抛弃">abandon</span> old ideas is crucial for success.</p>`,
+    timeline: [],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
 
-      openDoc(id);
-      showDocEditor();
-      showNotification('已创建新文档（仅临时存储）', 'success');
-    }
+  openDoc(id);
+  showDocEditor();
+  showNotification('已创建新文档（仅临时存储）', 'success');
+  
+  // 添加一键清除功能（延迟绑定，避免干扰其他功能）
+  setTimeout(() => {
+    const clearHint = function() {
+      if (editor.innerHTML.includes('在这里开始记录笔记')) {
+        editor.innerHTML = '';
+        editor.removeEventListener('click', clearHint);
+      }
+    };
+    editor.addEventListener('click', clearHint);
+  }, 500);
+}
 
     // 打开文档
     function openDoc(id) {
@@ -1914,7 +1951,9 @@
           let vocabInfo = null;
           let vocabType = '';
 
-          // 检查各类词汇库
+          // 按优先级顺序检查（考研 > TEM8 > TEM4 > CET6 > CET4）
+          
+          // 1. 考研词汇（最高优先级）
           if (vocabSettings.postgrad) {
             vocabInfo = vocabLib.postgrad.find(v => v.word.toLowerCase() === lowerWord);
             if (vocabInfo) {
@@ -1922,19 +1961,28 @@
             }
           }
           
-          if (!vocabInfo && vocabSettings.cet4) {
-            vocabInfo = vocabLib.cet4.find(v => v.word.toLowerCase() === lowerWord);
-            if (vocabInfo) vocabType = 'cet4';
+          // 2. TEM8词汇（第二优先级）
+          if (!vocabInfo && vocabSettings.tem8) {
+            vocabInfo = vocabLib.tem8.find(v => v.word.toLowerCase() === lowerWord);
+            if (vocabInfo) vocabType = 'tem8';
           }
           
+          // 3. TEM4词汇（第三优先级）
+          if (!vocabInfo && vocabSettings.tem4) {
+            vocabInfo = vocabLib.tem4.find(v => v.word.toLowerCase() === lowerWord);
+            if (vocabInfo) vocabType = 'tem4';
+          }
+          
+          // 4. CET6词汇（第四优先级）
           if (!vocabInfo && vocabSettings.cet6) {
             vocabInfo = vocabLib.cet6.find(v => v.word.toLowerCase() === lowerWord);
             if (vocabInfo) vocabType = 'cet6';
           }
           
-          if (!vocabInfo && vocabSettings.tem8) {
-            vocabInfo = vocabLib.tem8.find(v => v.word.toLowerCase() === lowerWord);
-            if (vocabInfo) vocabType = 'tem8';
+          // 5. CET4词汇（最低优先级）
+          if (!vocabInfo && vocabSettings.cet4) {
+            vocabInfo = vocabLib.cet4.find(v => v.word.toLowerCase() === lowerWord);
+            if (vocabInfo) vocabType = 'cet4';
           }
 
           // 标注词汇
@@ -1972,9 +2020,10 @@
       const typeMap = {
         postgradHigh: '考研高频词（绿色标注）',  
         postgradMid: '考研中频词（淡绿色标注）',
-        cet4: 'CET4词汇',
-        cet6: 'CET6词汇',
-        tem8: 'TEM8词汇'
+        tem8: 'TEM8词汇（粉色标注）',
+        tem4: 'TEM4词汇（橙色标注）',
+        cet6: 'CET6词汇（紫色标注）',
+        cet4: 'CET4词汇（蓝色标注）'
       };
       return `${typeMap[vocabType]}：${vocabInfo.pos} ${vocabInfo.mean}`;
     }
@@ -2002,9 +2051,10 @@
       vocabCounters.totalPostgrad.textContent = totalPostgrad;
       vocabCounters.postgradHigh.textContent = postgradHighCount;
       vocabCounters.postgradMid.textContent = postgradMidCount;
-      vocabCounters.cet4.textContent = detectedVocabs.cet4.size;
-      vocabCounters.cet6.textContent = detectedVocabs.cet6.size;
       vocabCounters.tem8.textContent = detectedVocabs.tem8.size;
+      vocabCounters.tem4.textContent = detectedVocabs.tem4.size;
+      vocabCounters.cet6.textContent = detectedVocabs.cet6.size;
+      vocabCounters.cet4.textContent = detectedVocabs.cet4.size;
     }
 
     // 切换词汇标注开关
@@ -2019,9 +2069,10 @@
       const status = vocabSettings[type] ? '开启' : '关闭';
       const typeNameMap = {
         postgrad: '考研词汇标注',
-        cet4: 'CET4词汇标注',
+        tem8: 'TEM8词汇标注',
+        tem4: 'TEM4词汇标注',
         cet6: 'CET6词汇标注',
-        tem8: 'TEM8词汇标注'
+        cet4: 'CET4词汇标注'
       };
       showNotification(`${typeNameMap[type]}已${status}`, 'info');
     }
@@ -2140,19 +2191,21 @@ function showTranslatePopup(range, sourceText, translation, vocabInfo) {
   }).join('');
   document.getElementById('popupExplains').innerHTML = explainsHtml; // 替换原纯文本显示为HTML换行显示
   
-  // 3. 显示词汇类型（考研/CET4等，匹配原代码的词汇库）
+  // 3. 显示词汇类型（考研/TEM8/TEM4等，匹配原代码的词汇库）
   if (vocabInfo) {
     let vocabType = '';
-    // 检查当前单词属于哪个词汇库（考研/CET4/CET6/TEM8）
+    // 检查当前单词属于哪个词汇库（考研/TEM8/TEM4/CET6/CET4）
     const lowerWord = sourceText.toLowerCase();
     if (vocabLib.postgrad.some(v => v.word.toLowerCase() === lowerWord)) {
       vocabType = '考研词汇';
-    } else if (vocabLib.cet4.some(v => v.word.toLowerCase() === lowerWord)) {
-      vocabType = 'CET4词汇';
-    } else if (vocabLib.cet6.some(v => v.word.toLowerCase() === lowerWord)) {
-      vocabType = 'CET6词汇';
     } else if (vocabLib.tem8.some(v => v.word.toLowerCase() === lowerWord)) {
       vocabType = 'TEM8词汇';
+    } else if (vocabLib.tem4.some(v => v.word.toLowerCase() === lowerWord)) {
+      vocabType = 'TEM4词汇';
+    } else if (vocabLib.cet6.some(v => v.word.toLowerCase() === lowerWord)) {
+      vocabType = 'CET6词汇';
+    } else if (vocabLib.cet4.some(v => v.word.toLowerCase() === lowerWord)) {
+      vocabType = 'CET4词汇';
     }
     document.getElementById('popupVocabNote').textContent = vocabType ? `词汇类型：${vocabType}` : '';
   } else {
@@ -2415,6 +2468,7 @@ function showTranslatePopup(range, sourceText, translation, vocabInfo) {
             .vocab-cet4 { background: #dbeafe; border-bottom: 2px solid #3b82f6; }
             .vocab-cet6 { background: #ede9fe; border-bottom: 2px solid #a855f7; }
             .vocab-tem8 { background: #fce7f3; border-bottom: 2px solid #db2777; }
+            .vocab-tem4 { background: #fed7aa; border-bottom: 2px solid #f97316; }
             .translate-result { background: #dcfce7; padding: 10px; border-radius: 6px; margin: 10px 0; border-left: 3px solid #22c55e; }
           </style>
         </head>
@@ -2778,9 +2832,10 @@ editor.addEventListener('mouseup', async (e) => {
 
       // 词汇标注开关事件
       document.getElementById('togglePostGradWords').addEventListener('click', () => toggleVocabType('postgrad'));
-      document.getElementById('toggleCet4Words').addEventListener('click', () => toggleVocabType('cet4'));
-      document.getElementById('toggleCet6Words').addEventListener('click', () => toggleVocabType('cet6'));
       document.getElementById('toggleTem8Words').addEventListener('click', () => toggleVocabType('tem8'));
+      document.getElementById('toggleTem4Words').addEventListener('click', () => toggleVocabType('tem4'));
+      document.getElementById('toggleCet6Words').addEventListener('click', () => toggleVocabType('cet6'));
+      document.getElementById('toggleCet4Words').addEventListener('click', () => toggleVocabType('cet4'));
 
       // 编辑器内容变化事件
       editor.addEventListener('input', debounce(() => {
